@@ -1,28 +1,24 @@
-import React,{useState} from 'react';
+import React from 'react';
 import { StyleSheet,Text, View, TextInput} from 'react-native';
-import {styles, orangeText} from './style'
+import Box from './Box';
+import { StatusBar } from 'expo-status-bar';
 
 export default function App() {
   return (
     <View style={styles.container}>
-      <Text style={[styles.text,orangeText]}>style Code</Text>
-      <Text style={[styles.text, styles.errorText]}>Error Text</Text>
+      <StatusBar style='auto'/>
+      <Box style={{backgroundColor:"red", height:100}}/>
+      <Box style={{backgroundColor:"green", flex:1}}/>
+      <Box style={{backgroundColor:"blue", height:100}}/>
     </View>
   );
 }
 
-// const styles = StyleSheet.create({
-//   container: {
-//     flex: 1,
-//     backgroundColor: '#fff',
-//     alignItems: 'center',
-//     justifyContent: 'center',
-//   },
-//   text:{
-//     backgroundColor:"black",
-//     color: "white", 
-//     fontSize:20},
-//   errorText:{
-//     color:"red",
-//   }
-// });
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    backgroundColor: '#fff',
+    alignItems: 'center',
+    justifyContent: 'center',
+  }
+});
