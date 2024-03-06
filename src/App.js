@@ -1,15 +1,13 @@
 import React from 'react';
-import { StyleSheet,Text, View, TextInput} from 'react-native';
-import Box from './Box';
+import { StyleSheet, View, TextInput} from 'react-native';
 import { StatusBar } from 'expo-status-bar';
+import Shadow from './Shadow';
 
 export default function App() {
   return (
     <View style={styles.container}>
       <StatusBar style='auto'/>
-      <Box style={{backgroundColor:"red", height:100}}/>
-      <Box style={{backgroundColor:"green", flex:1}}/>
-      <Box style={{backgroundColor:"blue", height:100}}/>
+    <Shadow/>
     </View>
   );
 }
