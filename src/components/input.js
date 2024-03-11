@@ -14,8 +14,13 @@ const StyledInput = styled.TextInput.attrs(({ theme }) => ({
     background-color: ${({ theme }) => theme.itemBackground};
     color: ${({ theme }) => theme.text};
 `;
+<<<<<<< Updated upstream
 
 const Input = ({ placeholder }) => {
+=======
+//develop 추가
+const Input = ({ placeholder, value, onChangeText, onSubmitEditing }) => {
+>>>>>>> Stashed changes
     // const width = Dimensions.get('window').width;
     const width = useWindowDimensions().width;
     // maxLength=> 최대 50의 길이만 받을 수 있다.
