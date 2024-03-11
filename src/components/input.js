@@ -16,6 +16,7 @@ const StyledInput = styled.TextInput.attrs(({ theme }) => ({
     color: ${({ theme }) => theme.text};
 `;
 
+//develop 추가
 const Input = ({ placeholder, value, onChangeText, onSubmitEditing }) => {
     // const width = Dimensions.get('window').width;
     const width = useWindowDimensions().width;
