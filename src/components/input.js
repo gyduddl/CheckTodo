@@ -10,15 +10,15 @@ const StyledInput = styled.TextInput.attrs(({ theme }) => ({
     height: 60px;
     margin: 3px 0;
     padding: 15px 20px;
-    border-radius: 25px;
+    border-radius: 10px;
     font-size: 25px;
     background-color: ${({ theme }) => theme.itemBackground};
     color: ${({ theme }) => theme.text};
 `;
 
 const Input = ({ placeholder, value, onChangeText, onSubmitEditing }) => {
-    // const width = Dimensions.get('window').width;
-    const width = useWindowDimensions().width;
+    const width = Dimensions.get('window').width;
+    // const width = useWindowDimensions().width;
     return (
         <StyledInput
             width={width}

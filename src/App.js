@@ -1,10 +1,9 @@
 import React, { useState } from 'react';
-import { StatusBar } from 'react-native';
+import { StatusBar, Dimensions } from 'react-native';
 import styled, { ThemeProvider } from 'styled-components/native';
 import { theme } from './theme';
-import Input from './components/input';
-import IconButton from './components/IconButton';
-import { icons } from './icons';
+import Input from './components/Input';
+import Task from './components/Task';
 
 const Container = styled.SafeAreaView`
     flex: 1;
@@ -21,6 +20,11 @@ const Title = styled.Text`
     padding: 0 20px;
 `;
 
+const List = styled.ScrollView`
+    width: ${({ width }) => width - 40}px;
+    flex: 1;
+`;
+
 export default function App() {
     const [newTask, setNewTask] = useState('');
 
@@ -28,6 +32,7 @@ export default function App() {
         alert(newTask);
         setNewTask('');
     };
+    const width = Dimensions.get('window').width;
     return (
         <ThemeProvider theme={theme}>
             <Container>
@@ -39,10 +44,21 @@ export default function App() {
                     onChangeText={(text) => setNewTask(text)}
                     onSubmitEditing={addTask}
                 />
-                <IconButton icon={icons.check} onPress={() => alert('check')} />
-                <IconButton icon={icons.uncheck} onPress={() => alert('uncheck')} />
-                <IconButton icon={icons.edit} onPress={() => alert('edit')} />
-                <IconButton icon={icons.delete} onPress={() => alert('delete')} />
+                <List width={width}>
+                    <Task text='React Native' />
+                    <Task text='React Native1' />
+                    <Task text='React Native2' />
+                    <Task text='React Native3' />
+                    <Task text='React Native4' />
+                    <Task text='React Native5' />
+                    <Task text='React Native6' />
+                    <Task text='React Native7' />
+                    <Task text='React Native8' />
+                    <Task text='React Native9' />
+                    <Task text='React Native10' />
+                    <Task text='React Native11' />
+                    <Task text='React Native12' />
+                </List>
             </Container>
         </ThemeProvider>
     );
