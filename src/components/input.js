@@ -1,6 +1,7 @@
 import react from 'react';
 import styled from 'styled-components/native';
 import { Dimensions, useWindowDimensions } from 'react-native';
+import PropTypes from 'prop-types';
 
 const StyledInput = styled.TextInput.attrs(({ theme }) => ({
     placeholderTextColor: theme.main,
@@ -15,10 +16,9 @@ const StyledInput = styled.TextInput.attrs(({ theme }) => ({
     color: ${({ theme }) => theme.text};
 `;
 
-const Input = ({ placeholder }) => {
+const Input = ({ placeholder, value, onChangeText, onSubmitEditing }) => {
     // const width = Dimensions.get('window').width;
     const width = useWindowDimensions().width;
-    // maxLength=> 최대 50의 길이만 받을 수 있다.
     return (
         <StyledInput
             width={width}
@@ -28,8 +28,18 @@ const Input = ({ placeholder }) => {
             autoCorrect={false}
             returnKeyType='done'
             keyboardAppearance='dark'
+            value={value}
+            onChangeText={onChangeText}
+            onSubmitEditing={onSubmitEditing}
         />
     );
+};
+
+Input.PropTypes = {
+    placeholder: PropTypes.string,
+    value: PropTypes.string.isRequired,
+    onChangeText: PropTypes.func.isRequired,
+    onSubmitEditing: PropTypes.func.isRequired,
 };
 
 export default Input;
