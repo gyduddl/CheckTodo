@@ -35,7 +35,7 @@ const Input = ({ placeholder, value, onChangeText, onSubmitEditing }) => {
     );
 };
 
-Input.PropTypes = {
+Input.propTypes = {
     placeholder: PropTypes.string,
     value: PropTypes.string.isRequired,
     onChangeText: PropTypes.func.isRequired,
