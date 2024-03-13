@@ -1,9 +1,13 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { StatusBar, Dimensions } from 'react-native';
 import styled, { ThemeProvider } from 'styled-components/native';
 import { theme } from './theme';
 import Input from './components/input';
 import Task from './components/Task';
+import AsyncStorage from '@react-native-async-storage/async-storage';
+import * as SplashScreen from 'expo-splash-screen';
+
+// SplashScreen.preventAutoHideAsync();
 
 const Container = styled.SafeAreaView`
     flex: 1;
@@ -31,15 +35,35 @@ export default function App() {
     //input 창 텍스트 입력
     const [newTask, setNewTask] = useState('');
 
-    //할일 목록(임시데이터)
-    const tempData = {
-        1: { id: '1', text: 'React Native', completed: false },
-        2: { id: '2', text: 'Expo', completed: true },
-        3: { id: '3', text: 'JavasScript', completed: false },
+    //할일 목록 관리 상태 변수
+    const [tasks, setTasks] = useState({});
+
+    //local 데이터 저장
+    const storeData = async (tasks) => {
+        try {
+            //저장할 객체를 전달 받고 'task'라는 키와 JSON.stringify를 활용해
+            //전달된 객체를 문자열로 만들어서 저장
+            // 저장이 완료되면 전달된 데이터를 setTasks에 설정해서 최신 데이터를 유지하도록 설정
+            await AsyncStorage.setItem('tasks', JSON.stringify(tasks));
+            console.log(AsyncStorage.getItem('tasks'));
+            setTasks(tasks);
+        } catch (e) {
+            //
+        }
     };
 
-    //할일 목록 관리 상태 변수
-    const [tasks, setTasks] = useState(tempData);
+    //local에 저장된 데이터 불러오기
+    const getData = async () => {
+        try {
+            const loadedData = await AsyncStorage.getItem('tasks');
+            //가져온 데이터는 문자열이기에 json.parse를 통해 객체형태로 변경
+            // 저장된 데이터가 없으면 json.parse에서 에러가 날수 있으니 데이터가 없으면
+            // 빈객체의 string형태로 처리하도록 설정
+            setTasks(JSON.parse(loadedData || '{}'));
+        } catch (e) {
+            //
+        }
+    };
 
     //목록 추가 함수
     const addTask = () => {
@@ -53,14 +77,14 @@ export default function App() {
         };
         alert(newTask);
         setNewTask('');
-        setTasks({ ...tasks, ...newTaskObject });
+        storeData({ ...tasks, ...newTaskObject });
     };
 
     //목록 삭제 함수
     const deleteTask = (id) => {
         const currentTasks = Object.assign({}, tasks);
         delete currentTasks[id];
-        setTasks(currentTasks);
+        storeData(currentTasks);
     };
 
     //목록 완료 함수 toggle
@@ -68,7 +92,7 @@ export default function App() {
         const currentTasks = Object.assign({}, tasks);
         //선택된 id의 completed값을 반대로 설정
         currentTasks[id]['completed'] = !currentTasks[id]['completed'];
-        setTasks(currentTasks);
+        storeData(currentTasks);
     };
 
     //수정된 목록 update
@@ -76,10 +100,27 @@ export default function App() {
         const currentTasks = Object.assign({}, tasks);
         //현재 목록에서 수정하는 아이템 전체를 변경
         currentTasks[item.id] = item;
-        setTasks(currentTasks);
+        storeData(currentTasks);
     };
 
-    return (
+    //앱 로딩
+    const [isReady, setIsReady] = useState(false);
+
+    useEffect(() => {
+        async function prepare() {
+            try {
+                await getData();
+            } catch (e) {
+                () => {};
+            } finally {
+                setIsReady(true);
+            }
+        }
+
+        prepare();
+    }, []);
+
+    return isReady ? (
         <ThemeProvider theme={theme}>
             <Container>
                 <StatusBar barStyle='light-content' backgroundColor={theme.background} />
@@ -107,5 +148,7 @@ export default function App() {
                 </List>
             </Container>
         </ThemeProvider>
+    ) : (
+        []
     );
 }
