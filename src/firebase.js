@@ -49,3 +49,21 @@ export const signup = async ({ name, email, password, photo }) => {
     // 생성된 유저 반환
     return user;
 };
+
+// 로그인한 사람의 정보를 받아오는 함수
+export const getCurrentUser = () => {
+    const { uid, displayName, email, photoURL } = auth.currentUser;
+    return { uid, name: displayName, email, photo: photoURL };
+};
+
+//profile 화면에서 Image update 함수
+export const updateUserInfo = async (photo) => {
+    const photoURL = await uploadImage(photo);
+    await updateProfile(auth.currentUser, { photoURL });
+    return photoURL;
+};
+
+export const signout = async () => {
+    await signOut(auth);
+    return {};
+};

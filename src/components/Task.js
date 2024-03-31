@@ -9,7 +9,7 @@ import Input from './input';
 const Container = styled.View`
     flex-direction: row;
     align-items: center;
-    background-color: ${({ theme }) => theme.itemBackground};
+    background-color: ${({ theme }) => theme.main};
     border-radius: 10px;
     padding: 5px;
     margin: 3px 0;

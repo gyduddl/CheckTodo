@@ -13,7 +13,7 @@ const Navigation = () => {
     return (
         <NavigationContainer>
             {/* user의 정보에 따라 특정 내비게이션이 렌더링 되도록 수정 */}
-            {!user.uid ? <Main /> : <Auth />}
+            {user.uid ? <Main /> : <Auth />}
             {inProgress && <Spinner />}
         </NavigationContainer>
     );
