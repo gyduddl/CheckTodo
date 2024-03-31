@@ -1,10 +1,11 @@
-import React, { useState, useRef, useEffect } from 'react';
+import React, { useState, useRef, useEffect, useContext } from 'react';
 import styled from 'styled-components/native';
 import { Button, Image, CheckInput, ErrorMessage } from '../components';
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
 import { Alert, Platform } from 'react-native';
 import { signup } from '../firebase';
 import { validateEmail, removeWhitespace } from '../utils';
+import { UserContext, ProgressContext } from '../contexts';
 
 const Container = styled.View`
     flex: 1;
@@ -24,6 +25,9 @@ const Container = styled.View`
 const DEFAULT_PHOTO = `https://firebasestorage.googleapis.com/v0/b/checktodo-68e26.appspot.com/o/face.png?alt=media`;
 
 const Signup = ({ navigation }) => {
+    const { setUser } = useContext(UserContext);
+    const { spinner } = useContext(ProgressContext);
+
     const [photo, setPhoto] = useState(DEFAULT_PHOTO);
     const [name, setName] = useState('');
     const [email, setEmail] = useState('');
@@ -70,10 +74,14 @@ const Signup = ({ navigation }) => {
     // 회원가입 기능
     const _handleSignupBtnPress = async () => {
         try {
+            spinner.start();
             const user = await signup({ name, email, password, photo });
-            navigation.navigate('Profile', { user });
+            setUser(user);
+            // navigation.navigate('Profile', { user });
         } catch (e) {
             Alert.alert('Signup Error', e.message);
+        } finally {
+            spinner.stop();
         }
     };
 

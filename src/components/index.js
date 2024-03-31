@@ -5,5 +5,6 @@ import Task from './Task';
 import Image from './Image';
 import CheckInput from './CheckInput';
 import ErrorMessage from './ErrorMessage';
+import Spinner from './Spinner';
 
-export { Button, IconButton, Input, Task, Image, CheckInput, ErrorMessage };
+export { Button, IconButton, Input, Task, Image, CheckInput, ErrorMessage, Spinner };

@@ -1,7 +1,7 @@
 import React, { useContext } from 'react';
 import { ThemeContext } from 'styled-components/native';
 import { createStackNavigator } from '@react-navigation/stack';
-import { Signin, Signup, Profile } from '../screens';
+import { Signin, Signup } from '../screens';
 import { MaterialIcons } from '@expo/vector-icons';
 
 const Stack = createStackNavigator();
@@ -27,7 +27,6 @@ const Auth = () => {
                     ),
                 }}
             />
-            <Stack.Screen name='Profile' component={Profile} />
             {/* <Stack.Screen name='TodoApp' component={TodoApp} /> */}
         </Stack.Navigator>
     );

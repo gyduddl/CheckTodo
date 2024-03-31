@@ -1,4 +1,5 @@
-import React from 'react';
+import React, { useContext } from 'react';
+import { UserContext } from '../contexts';
 import styled from 'styled-components/native';
 import { Button } from '../components';
 import { LogBox } from 'react-native';
@@ -10,10 +11,10 @@ const Container = styled.View`
 `;
 
 const Profile = ({ navigation, route }) => {
-    console.log(route.params);
+    const { setUser } = useContext(UserContext);
     return (
         <Container>
-            <Button title='signout' onPress={() => navigation.navigate('Signin')} />
+            <Button title='signout' onPress={() => setUser({})} />
         </Container>
     );
 };
