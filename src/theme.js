@@ -33,4 +33,8 @@ export const theme = {
     inputPlaceholder: Colors.grey_1,
     inputBorder: Colors.grey_1,
     inputDisabled: Colors.grey_0,
+
+    //spinner
+    spinnerBackground: Colors.black,
+    spinnerIndicator: Colors.white,
 };

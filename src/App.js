@@ -153,29 +153,23 @@
 // }
 
 import React from 'react';
-import styled, { ThemeProvider } from 'styled-components/native';
+import { ThemeProvider } from 'styled-components/native';
 import { theme } from './theme';
-import TodoApp from './screens/TodoApp';
+// import TodoApp from './screens/TodoApp';
 import { StatusBar } from 'react-native';
-// import { NavigationContainer } from '@react-navigation/native';
-import StackNav from './navigations/Stack';
 import Navigation from './navigations';
-
-const Container = styled.SafeAreaView`
-    flex: 1;
-    background-color: ${({ theme }) => theme.background};
-    align-items: center;
-    justify-content: flex-start;
-`;
+import { UserProvider, ProgressProvider } from './contexts';
 
 export default function App() {
     return (
         <ThemeProvider theme={theme}>
-            {/* <Container> */}
-            <StatusBar barStyle='light-content' backgroundColor={theme.background} />
-            {/* <TodoApp /> */}
-            <Navigation />
-            {/* </Container> */}
+            <ProgressProvider>
+                <UserProvider>
+                    <StatusBar barStyle='light-content' backgroundColor={theme.background} />
+                    {/* <TodoApp /> */}
+                    <Navigation />
+                </UserProvider>
+            </ProgressProvider>
         </ThemeProvider>
     );
 }
