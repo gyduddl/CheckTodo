@@ -4,6 +4,13 @@ import styled from 'styled-components/native';
 import { Input, Task } from '../components';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 
+const Container = styled.View`
+    flex: 1;
+    justify-content: center;
+    align-items: center;
+    background-color: ${({ theme }) => theme.background};
+    padding: 0 20px;
+`;
 const Title = styled.Text`
     font-size: 40px;
     font-weight: 600;
@@ -110,7 +117,7 @@ const TodoApp = () => {
     // const [isEditing, setIsEditing] = useState(false);
 
     return isReady ? (
-        <>
+        <Container>
             <Title>TODO List</Title>
             <Input
                 placeholder='+ Add a Task'
@@ -136,7 +143,7 @@ const TodoApp = () => {
                         />
                     ))}
             </List>
-        </>
+        </Container>
     ) : (
         []
     );
