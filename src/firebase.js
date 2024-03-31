@@ -67,3 +67,24 @@ export const signout = async () => {
     await signOut(auth);
     return {};
 };
+
+//채널을 생성하는 함수
+const db = getFirestore(app);
+
+export const createChannel = async ({ title, desc }) => {
+    // 컬렉션 중 이름이 channels인 것만 이용
+    const channelCollection = collection(db, 'channels');
+    const newChannelRef = doc(channelCollection);
+    //아무것도 넘기지 않고 document 함수를 호출하면 id가 자동으로 생성
+    const id = newChannelRef.id;
+    const newChannel = {
+        id,
+        title,
+        description: desc,
+        createdAt: Date.now(),
+    };
+    // newChannel의 데이터들로 document에 업데이트
+    await setDoc(newChannelRef, newChannel);
+    //생성된 document의 아이디를 반환
+    return id;
+};
