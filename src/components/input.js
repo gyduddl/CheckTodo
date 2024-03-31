@@ -4,7 +4,7 @@ import { Dimensions, useWindowDimensions } from 'react-native';
 import PropTypes from 'prop-types';
 
 const StyledInput = styled.TextInput.attrs(({ theme }) => ({
-    placeholderTextColor: theme.main,
+    placeholderTextColor: theme.done,
 }))`
     width: ${({ width }) => width - 40}px;
     height: 60px;
@@ -12,7 +12,7 @@ const StyledInput = styled.TextInput.attrs(({ theme }) => ({
     padding: 15px 20px;
     border-radius: 10px;
     font-size: 25px;
-    background-color: ${({ theme }) => theme.itemBackground};
+    background-color: ${({ theme }) => theme.main};
     color: ${({ theme }) => theme.text};
 `;
 

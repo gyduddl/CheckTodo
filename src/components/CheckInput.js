@@ -19,7 +19,7 @@ const Label = styled.Text`
 const StyledInput = styled.TextInput.attrs(({ theme }) => ({
     placeholderTextColor: theme.inputPlaceholder,
 }))`
-    background-color: ${({ theme }) => theme.inputBackground};
+    background-color: ${({ theme, editable }) => (editable ? theme.inputBackground : theme.inputDisabled)};
     color: ${({ theme }) => theme.text2};
     ${Platform.select({
         ios: `
@@ -36,7 +36,18 @@ const StyledInput = styled.TextInput.attrs(({ theme }) => ({
 
 const CheckInput = forwardRef(
     (
-        { label, value, onChangeText, onSubmitEditing, onBlur, placeholder, returnKeyType, maxLength, isPassword },
+        {
+            label,
+            value,
+            onChangeText,
+            onSubmitEditing,
+            onBlur,
+            placeholder,
+            returnKeyType,
+            maxLength,
+            isPassword,
+            disabled,
+        },
         ref
     ) => {
         //focus 상태 관리
@@ -62,6 +73,7 @@ const CheckInput = forwardRef(
                     isFocused={isFocused}
                     onFocus={() => setIsFocused(true)}
                     secureTextEntry={isPassword}
+                    editable={!disabled} //수정 여부 결정
                 />
             </Container>
         );
@@ -82,6 +94,7 @@ CheckInput.prototype = {
     returnKeyType: PropTypes.oneOf(['done', 'next']),
     maxLength: PropTypes.number,
     isPassword: PropTypes.bool,
+    disabled: PropTypes.bool,
 };
 
 export default CheckInput;
