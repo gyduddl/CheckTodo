@@ -1,8 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { Dimensions } from 'react-native';
 import styled from 'styled-components/native';
-import Input from '../components/input';
-import Task from '../components/Task';
+import { Input, Task } from '../components';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 
 const Title = styled.Text`

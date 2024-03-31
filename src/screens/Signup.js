@@ -1,8 +1,10 @@
-import React, { useState, useRef } from 'react';
+import React, { useState, useRef, useEffect } from 'react';
 import styled from 'styled-components/native';
-import { Button, Image, CheckInput } from '../components';
+import { Button, Image, CheckInput, ErrorMessage } from '../components';
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
-import { Platform } from 'react-native';
+import { Alert, Platform } from 'react-native';
+import { signup } from '../firebase';
+import { validateEmail, removeWhitespace } from '../utils';
 
 const Container = styled.View`
     flex: 1;
@@ -19,26 +21,66 @@ const Container = styled.View`
     })}
 `;
 
-// const LOGO = `https://firebasestorage.googleapis.com/v0/b/checktodo-68e26.appspot.com/o/face.png?alt=media`;
+const DEFAULT_PHOTO = `https://firebasestorage.googleapis.com/v0/b/checktodo-68e26.appspot.com/o/face.png?alt=media`;
 
-const Signup = () => {
+const Signup = ({ navigation }) => {
+    const [photo, setPhoto] = useState(DEFAULT_PHOTO);
     const [name, setName] = useState('');
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
     const [passwordConfirm, setPasswordConfirm] = useState('');
+    const [errorMessage, setErrorMessage] = useState('');
+    const [disabled, setDisabled] = useState(true);
 
     const refEmail = useRef(null);
     const refPassword = useRef(null);
     const refPasswordConfirm = useRef(null);
+    //회원가입 창이 마운트 되자마자 유효성 검사가 뜨는 것을 방지하는 것
+    const refDidMount = useRef(null);
 
-    //비밀번호를 입력하는 input 컴포넌트의 onSubmitEditing과 signup버튼에서 호출되는 onPress가 같은 함수를 바라보도록 하는 함수
-    const _handleSignupBtnPress = () => {
-        console.log('signup');
+    //disabled 설정함수
+    useEffect(() => {
+        setDisabled(!(name && email && password && passwordConfirm && !errorMessage));
+    }, [email, name, passwordConfirm, password, errorMessage]);
+
+    // 유효성검사
+    useEffect(() => {
+        if (refDidMount.current) {
+            //refDidMount의 current가 true일때에만 동작하도록 설정
+            let error = '';
+            if (!name) {
+                error = 'Please enter yout name';
+            } else if (!email) {
+                error = 'Please enter your email';
+            } else if (!validateEmail(email)) {
+                error = ' Please verify your email';
+            } else if (password.length < 6) {
+                error = 'The password must contain 6 characters at least';
+            } else if (password !== passwordConfirm) {
+                error = 'Password need to match';
+            } else {
+                error = '';
+            }
+            setErrorMessage(error);
+        } else {
+            refDidMount.current = true;
+        }
+    }, [email, name, password, passwordConfirm]);
+
+    // 회원가입 기능
+    const _handleSignupBtnPress = async () => {
+        try {
+            const user = await signup({ name, email, password, photo });
+            navigation.navigate('Profile', { user });
+        } catch (e) {
+            Alert.alert('Signup Error', e.message);
+        }
     };
+
     return (
         <KeyboardAwareScrollView extraScrollHeight={20}>
             <Container>
-                <Image />
+                <Image showButton={true} url={photo} onChangePhoto={setPhoto} />
                 <CheckInput
                     label='Name'
                     placeholder='Name'
@@ -46,6 +88,8 @@ const Signup = () => {
                     value={name}
                     onChangeText={setName}
                     onSubmitEditing={() => refEmail.current.focus()}
+                    onBlur={() => setName(name.trim())}
+                    maxLength={12}
                 />
                 <CheckInput
                     label='Email'
@@ -55,6 +99,7 @@ const Signup = () => {
                     value={email}
                     onChangeText={setEmail}
                     onSubmitEditing={() => refPassword.current.focus()}
+                    onBlur={() => setEmail(removeWhitespace(email))}
                 />
 
                 <CheckInput
@@ -66,6 +111,7 @@ const Signup = () => {
                     onChangeText={setPassword}
                     isPassword={true}
                     onSubmitEditing={() => refPasswordConfirm.current.focus()}
+                    onBlur={() => setPassword(removeWhitespace(password))}
                 />
                 <CheckInput
                     label='PasswordConfirm'
@@ -76,8 +122,10 @@ const Signup = () => {
                     onChangeText={setPasswordConfirm}
                     isPassword={true}
                     onSubmitEditing={_handleSignupBtnPress}
+                    onBlur={() => setPasswordConfirm(removeWhitespace(passwordConfirm))}
                 />
-                <Button title='sign up' onPress={_handleSignupBtnPress} />
+                <ErrorMessage message={errorMessage} />
+                <Button title='sign up' onPress={_handleSignupBtnPress} disabled={disabled} />
             </Container>
         </KeyboardAwareScrollView>
     );

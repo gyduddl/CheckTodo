@@ -4,6 +4,7 @@ const Colors = {
     main: '#9D5A9D',
     grey_0: '#d5d5d5',
     grey_1: '#a6a6a6',
+    red: '#e84118',
 };
 
 export const theme = {
@@ -13,6 +14,7 @@ export const theme = {
     text: '#eeeeee',
     text2: Colors.black,
     done: '#D0ACD0',
+    errorText: Colors.red,
 
     // Button
     btnBackground: Colors.main,
@@ -22,6 +24,8 @@ export const theme = {
 
     //Image
     imgBackground: Colors.grey_0,
+    imgBtnBackground: Colors.grey_1,
+    imgBtnIcon: Colors.white,
 
     //Input
     inputBackground: Colors.white,
