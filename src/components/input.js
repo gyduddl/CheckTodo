@@ -1,6 +1,5 @@
-import react from 'react';
 import styled from 'styled-components/native';
-import { Dimensions, useWindowDimensions } from 'react-native';
+import { Dimensions } from 'react-native';
 import PropTypes from 'prop-types';
 
 const StyledInput = styled.TextInput.attrs(({ theme }) => ({
@@ -18,7 +17,6 @@ const StyledInput = styled.TextInput.attrs(({ theme }) => ({
 
 const Input = ({ placeholder, value, onChangeText, onSubmitEditing, onBlur }) => {
     const width = Dimensions.get('window').width;
-    // const width = useWindowDimensions().width;
     return (
         <StyledInput
             width={width}

@@ -1,7 +1,7 @@
 import React, { useContext } from 'react';
 import { ThemeContext } from 'styled-components/native';
 import { createStackNavigator } from '@react-navigation/stack';
-import { Channel, ChannelCreation, ChannelList } from '../screens';
+import { Channel, ChannelCreation } from '../screens';
 import Home from './Home';
 
 const Stack = createStackNavigator();

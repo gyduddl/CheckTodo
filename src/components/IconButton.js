@@ -2,7 +2,7 @@ import React from 'react';
 import { TouchableOpacity, View } from 'react-native';
 import styled from 'styled-components/native';
 import PropTypes from 'prop-types';
-import { icons } from '../icons'; //객체형태
+import { icons } from '../icons';
 
 const Icon = styled.Image`
     width: 30px;
@@ -12,9 +12,6 @@ const Icon = styled.Image`
 `;
 
 const IconButton = ({ icon, onPress, item }) => {
-    //아이콘 버튼에서 onpressevent가 발생할때 전달되어온 함수의
-    // 파라미터 id를 전달해야하기 때문에 prop로 전달된 onPress가 호출될떄
-    // id를 파라미터로 전달되도록 설정...
     const _onPress = () => {
         onPress(item.id);
     };
