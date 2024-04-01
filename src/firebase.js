@@ -88,3 +88,9 @@ export const createChannel = async ({ title, desc }) => {
     //생성된 document의 아이디를 반환
     return id;
 };
+
+//메세지 생성하는 함수
+export const createMessage = async ({ channelId, message }) => {
+    const docRef = doc(db, `channels/${channelId}/messages`, message._id);
+    await setDoc(docRef, { ...message, createdAt: Date.now() });
+};
