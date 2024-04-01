@@ -35,8 +35,6 @@ const Signin = ({ navigation }) => {
     const refPassword = useRef(null);
 
     // disabled 설정함수
-    // + 이메일이 입력되어 있고, 비밀번호가 입력되어 있고, 에러메시지가 없을때
-    // + disabled가 false가 된다.
     useEffect(() => {
         setDisabled(!(email && password && !errorMessage));
     }, [email, password, errorMessage]);
@@ -52,7 +50,6 @@ const Signin = ({ navigation }) => {
         setPassword(removeWhitespace(password));
     };
 
-    //비밀번호를 입력하는 input 컴포넌트의 onSubmitEditing과 signin버튼에서 호출되는 onPress가 같은 함수를 바라보도록 하는 함수
     const _handleSigninBtnPress = async () => {
         try {
             spinner.start();

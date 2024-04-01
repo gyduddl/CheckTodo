@@ -77,7 +77,6 @@ const Signup = ({ navigation }) => {
             spinner.start();
             const user = await signup({ name, email, password, photo });
             setUser(user);
-            // navigation.navigate('Profile', { user });
         } catch (e) {
             Alert.alert('Signup Error', e.message);
         } finally {

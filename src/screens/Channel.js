@@ -110,7 +110,7 @@ const Channel = ({ navigation, route }) => {
 
     //메세지 전달
     const _handleMessageSend = async (messageList) => {
-        const message = messageList[0]; //배열로 들어오기 때문에
+        const message = messageList[0];
         try {
             await createMessage({ channelId: route.params.id, message });
         } catch (e) {

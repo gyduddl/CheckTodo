@@ -27,7 +27,6 @@ const Auth = () => {
                     ),
                 }}
             />
-            {/* <Stack.Screen name='TodoApp' component={TodoApp} /> */}
         </Stack.Navigator>
     );
 };

@@ -37,9 +37,6 @@ const TodoApp = () => {
     //local 데이터 저장
     const storeData = async (tasks) => {
         try {
-            //저장할 객체를 전달 받고 'task'라는 키와 JSON.stringify를 활용해
-            //전달된 객체를 문자열로 만들어서 저장
-            // 저장이 완료되면 전달된 데이터를 setTasks에 설정해서 최신 데이터를 유지하도록 설정
             await AsyncStorage.setItem('tasks', JSON.stringify(tasks));
             setTasks(tasks);
         } catch (e) {
@@ -51,9 +48,6 @@ const TodoApp = () => {
     const getData = async () => {
         try {
             const loadedData = await AsyncStorage.getItem('tasks');
-            //가져온 데이터는 문자열이기에 json.parse를 통해 객체형태로 변경
-            // 저장된 데이터가 없으면 json.parse에서 에러가 날수 있으니 데이터가 없으면
-            // 빈객체의 string형태로 처리하도록 설정
             setTasks(JSON.parse(loadedData || '{}'));
         } catch (e) {
             //
@@ -114,7 +108,6 @@ const TodoApp = () => {
 
         prepare();
     }, []);
-    // const [isEditing, setIsEditing] = useState(false);
 
     return isReady ? (
         <Container>
@@ -125,12 +118,10 @@ const TodoApp = () => {
                 onChangeText={(text) => {
                     setNewTask(text);
                 }}
-                // onFocus={() => setIsEditing(false)}
                 onSubmitEditing={addTask}
                 onBlur={() => setNewTask('')} //입력이 종료되었을떄 빈배열로
             />
             <List width={width}>
-                {/* 최근에 쓴 내용이 제일 위로 가도록 reverse */}
                 {Object.values(tasks)
                     .reverse()
                     .map((items) => (

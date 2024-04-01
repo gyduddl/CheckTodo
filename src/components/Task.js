@@ -1,5 +1,5 @@
 // 목록 컴포넌트
-import React, { useState, useRef, useEffect } from 'react';
+import React, { useState } from 'react';
 import styled from 'styled-components/native';
 import PropTypes from 'prop-types';
 import IconButton from './IconButton';
@@ -57,17 +57,8 @@ const Task = ({ item, deleteTask, toggleTask, updateTask }) => {
         </Container>
     );
 };
-// 만약 icon을 누리면 isEditing이 true가 된다.
-// item.completed는 어떤거지..아이템의 completed를 확인하는 부분인데 -> check uncheck를 확인해주는 부분이군
-// item.completed는 상관없다는 것이고 편집 모드를 누르면 isEditing이 true가 된다는것
-//이것은 input형태로 바꿔준다는 것
-// input창에서 onBlue를 눌렀을떄 즉, 포커스가 해제되었을 때 isEditing이 false가 된다는 뜻
-// 1. 그렇다면 iconButton을 눌렀을 때 즉,onpress를 했을 때 input으로 포커스가 되어야 한다.(안됨)
-// 2. 그렇다면 iconButton을 누르고 위의 input을 눌렀을시 isEditing이 false가 되어야 한다는 것
-// 2-1. 상위 컴포넌트인 TodoApp에다가 state를 설정해주고 input 눌렀을
-//
+
 Task.propTypes = {
-    // App.js에서 전달받은 item은 객체이기에
     item: PropTypes.object.isRequired,
     deleteTask: PropTypes.func.isRequired,
     toggleTask: PropTypes.func.isRequired,

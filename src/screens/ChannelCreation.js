@@ -33,7 +33,7 @@ const ChannelCreation = ({ navigation }) => {
 
     //disabled 업데이트
     useEffect(() => {
-        setDisabled(!(title && desc && !errorMessage));
+        setDisabled(!(title && !errorMessage));
     }, [title, desc, errorMessage]);
 
     //제목이 변경될때 호출할 함수
