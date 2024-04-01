@@ -11,6 +11,12 @@
 ## 🖥️ 시연 영상
 
 
+
+💡 누르면 유튜브로 연결됩니다!
+
+[![시연 영상 바로가기]]([https://www.youtube.com/watch?v=WEgfeWAgKgo](https://youtu.be/TEFs-hkH25A))
+
+
 ## 📦 사용 스택
 ### Front-end
 
@@ -23,6 +29,11 @@
 
 
 ## 📝 각 페이지 구현 방법
+### 로그인 화면
+
+### Channel 화면
+
+### Todo 화면
 
 
 
