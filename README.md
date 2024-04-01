@@ -23,3 +23,32 @@
 
 
 ## 📝 각 페이지 구현 방법
+
+
+
+## 🛠️ 라이브러리
+React Navigation : https://reactnavigation.org/
+
+expo-image-picker : https://docs.expo.io/versions/latest/sdk/imagepicker/
+
+expo/vector-icon : https://docs.expo.io/guides/icons/
+
+firebase : https://docs.expo.io/guides/using-firebase/
+
+react-native-keyboard-aware-scroll-view : https://github.com/APSL/react-native-keyboard-aware-scroll-view
+
+moment : https://momentjs.com/
+
+react-native-gifted-chat : https://github.com/FaridSafi/react-native-gifted-chat
+
+prop-types : https://github.com/facebook/prop-types
+
+styled-components : https://styled-components.com/
+
+async-storage (AsyncStorage) :
+
+- https://docs.expo.io/versions/v40.0.0/sdk/async-storage/
+
+- https://react-native-async-storage.github.io/async-storage/docs/install/
+
+expo-app-loading (AppLoading) : https://docs.expo.io/versions/v40.0.0/sdk/app-loading/
