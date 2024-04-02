@@ -20,7 +20,6 @@
 
 [![시연 영상 바로가기](https://github.com/gyduddl/CheckTodo/assets/104330521/93dd9cb1-cdc7-4e1a-9bdc-e1cfa083be17)](https://www.youtube.com/watch?v=TEFs-hkH25A)
 
-https://www.youtube.com/watch?v=TEFs-hkH25A
 <br>
 
 ## 📦 사용 스택
