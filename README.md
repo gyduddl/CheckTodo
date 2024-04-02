@@ -49,10 +49,10 @@
 
 <br>
 
-+ firebase Authenticaion를 사용하여 로그인, 회원가입 구현 및 인증 화면 구현 (링크)
-+ Expo ImagePicker를 활용하여 기기 사진 접근 및 firebase Storage에 저장 (링크)
-+ react-native-keyboard-aware-scroll-view라이브러리에서 제공하는 keyboard-aware-scrollview를 이용하여 키보드가 input 창 가리는 이슈 해결 (링크)
-+ 로그인 통신 시 사용자가 다른 행동을 못하도록 Spinner 컴포넌트 구현 (링크)
++ firebase Authenticaion를 사용하여 로그인, 회원가입 구현 및 인증 화면 구현
++ Expo ImagePicker를 활용하여 기기 사진 접근 및 firebase Storage에 저장 
++ react-native-keyboard-aware-scroll-view라이브러리에서 제공하는 keyboard-aware-scrollview를 이용하여 키보드가 input 창 가리는 이슈 해결 
++ 로그인 통신 시 사용자가 다른 행동을 못하도록 Spinner 컴포넌트 구현 
 
 <br>
 
@@ -62,8 +62,9 @@
 
 <br>
 
-+ 데이터 리스트 렌더링시 FlatList 컴포넌트를 활용하여 스크롤 형태로 데이터 렌더링 및 React.memo를 활용하여 불필요한 데이터 리렌더링을 줄여 성능 최적화 진행 (링크)
-+ Gifted Chat 라이브러리를 활용하여 Cloud Firestore와 연동하여 채팅 앱 구현 (링크)
++ 데이터들이 reset되는 것을 방지하기 위해 AsyncStorage를 이용해 로컬에 데이터를 저장
++ 데이터 리스트 렌더링시 FlatList 컴포넌트를 활용하여 스크롤 형태로 데이터 렌더링 및 React.memo를 활용하여 불필요한 데이터 리렌더링을 줄여 성능 최적화 진행
++ Gifted Chat 라이브러리를 활용하여 Cloud Firestore와 연동하여 채팅 앱 구현
 
 <br>
 
@@ -72,7 +73,7 @@
 
 <br>
 
-+ 새로고침 시 데이터가 reset되는 것을 방지하기 위해 AsyncStorage를 이용해 로컬에 데이터를 저장 (링크)
++ 새로고침 시 데이터가 reset되는 것을 방지하기 위해 AsyncStorage를 이용해 로컬에 데이터를 저장
 
 
 <br>
