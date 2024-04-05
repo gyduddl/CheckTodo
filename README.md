@@ -25,9 +25,10 @@
 ## 📦 사용 스택
 ### Front-end
 <div>
-  <img src="https://img.shields.io/badge/reacnative-003E54.svg?style=for-the-badge&logo=react&logoColor=61DAFB" />&nbsp
+<img src="https://img.shields.io/badge/reacnative-003E54.svg?style=for-the-badge&logo=react&logoColor=61DAFB" />&nbsp
 <img src="https://img.shields.io/badge/react-20232a.svg?style=for-the-badge&logo=react&logoColor=61DAFB" />&nbsp
-<img src="https://img.shields.io/badge/reactnavigatiom-9999FF.svg?style=for-the-badge&logo=reactnavigation&logoColor=61DAFB" />&nbsp
+<img src="https://img.shields.io/badge/recoil-A6A9AA.svg?style=for-the-badge&logo=recoil&logoColor=61DAFB" />&nbsp
+<img src="https://img.shields.io/badge/reactnavigatiom-9999FF.svg?style=for-the-badge&logo=reactnavigation&logoColor=3578E5" />&nbsp
 <img src="https://img.shields.io/badge/styled--components-DB7093?style=for-the-badge&logo=styled-components&logoColor=ffd35b" />&nbsp
 <img src="https://img.shields.io/badge/expo-DAA449?style=for-the-badge&logo=expo&logoColor=000020" />&nbsp
 </div>
