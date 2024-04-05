@@ -1,4 +1,4 @@
-import { UserContext, UserProvider } from './User';
-import { ProgressContext, ProgressProvider } from './Progress';
+import { userAtom } from './User';
+import { spinnerAtom } from './Progress';
 
-export { UserContext, UserProvider, ProgressContext, ProgressProvider };
+export { spinnerAtom, userAtom };

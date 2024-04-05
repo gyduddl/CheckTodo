@@ -1,11 +1,12 @@
 import React, { useContext, useState } from 'react';
-import { UserContext } from '../contexts';
 import styled from 'styled-components/native';
 import { Button, Image, CheckInput } from '../components';
 import { getCurrentUser, updateUserInfo, signout } from '../firebase';
 import { Alert } from 'react-native';
-import { ProgressContext } from '../contexts';
 import { ThemeContext } from 'styled-components/native';
+import { useRecoilState } from 'recoil';
+import { spinnerAtom } from '../contexts/Progress';
+import { userAtom } from '../contexts/User';
 
 const Container = styled.View`
     flex: 1;
@@ -16,8 +17,9 @@ const Container = styled.View`
 `;
 
 const Profile = ({ navigation, route }) => {
-    const { spinner } = useContext(ProgressContext);
-    const { setUser } = useContext(UserContext);
+    const [inProgress, setInProgress] = useRecoilState(spinnerAtom);
+    const [userState, setUserState] = useRecoilState(userAtom);
+
     const theme = useContext(ThemeContext);
     const user = getCurrentUser();
 
@@ -25,13 +27,13 @@ const Profile = ({ navigation, route }) => {
 
     const _handlePhotoChange = async (url) => {
         try {
-            spinner.start();
+            setInProgress(true);
             const photoURL = await updateUserInfo(url);
             setPhoto(photoURL);
         } catch (e) {
             Alert.alert('Photo Error', e.message);
         } finally {
-            spinner.stop();
+            setInProgress(false);
         }
     };
 
@@ -47,7 +49,8 @@ const Profile = ({ navigation, route }) => {
                         await signout();
                     } catch (e) {
                     } finally {
-                        setUser({});
+                        setUserState({});
+                        // setUser({});
                     }
                 }}
                 containerStyle={{

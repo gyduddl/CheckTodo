@@ -5,7 +5,9 @@ import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view
 import { Alert, Platform } from 'react-native';
 import { signup } from '../firebase';
 import { validateEmail, removeWhitespace } from '../utils';
-import { UserContext, ProgressContext } from '../contexts';
+import { useRecoilState } from 'recoil';
+import { spinnerAtom } from '../contexts/Progress';
+import { userAtom } from '../contexts/User';
 
 const Container = styled.View`
     flex: 1;
@@ -25,8 +27,8 @@ const Container = styled.View`
 const DEFAULT_PHOTO = `https://firebasestorage.googleapis.com/v0/b/checktodo-68e26.appspot.com/o/face.png?alt=media`;
 
 const Signup = ({ navigation }) => {
-    const { setUser } = useContext(UserContext);
-    const { spinner } = useContext(ProgressContext);
+    const [inProgress, setInProgress] = useRecoilState(spinnerAtom);
+    const [userState, setUserState] = useRecoilState(userAtom);
 
     const [photo, setPhoto] = useState(DEFAULT_PHOTO);
     const [name, setName] = useState('');
@@ -74,13 +76,14 @@ const Signup = ({ navigation }) => {
     // 회원가입 기능
     const _handleSignupBtnPress = async () => {
         try {
-            spinner.start();
+            setInProgress(true);
             const user = await signup({ name, email, password, photo });
-            setUser(user);
+            // setUser(user);
+            setUserState({ uid: user.uid });
         } catch (e) {
             Alert.alert('Signup Error', e.message);
         } finally {
-            spinner.stop();
+            setInProgress(false);
         }
     };
 

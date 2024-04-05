@@ -1,4 +1,4 @@
-import React, { useContext, useState, useRef, useEffect } from 'react';
+import ReauseRecoilStatect, { useContext, useState, useRef, useEffect } from 'react';
 import styled from 'styled-components/native';
 import { Button, Image, CheckInput, ErrorMessage } from '../components';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
@@ -7,7 +7,9 @@ import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view
 import { signin } from '../firebase';
 import { Alert } from 'react-native';
 import { validateEmail, removeWhitespace } from '../utils';
-import { UserContext, ProgressContext } from '../contexts';
+import { useRecoilState } from 'recoil';
+import { spinnerAtom } from '../contexts/Progress';
+import { userAtom } from '../contexts/User';
 
 const Container = styled.View`
     flex: 1;
@@ -24,8 +26,9 @@ const LOGO = `https://firebasestorage.googleapis.com/v0/b/checktodo-68e26.appspo
 const Signin = ({ navigation }) => {
     const insets = useSafeAreaInsets();
     const theme = useContext(ThemeContext);
-    const { setUser } = useContext(UserContext);
-    const { spinner } = useContext(ProgressContext);
+    //recoil
+    const [inProgress, setInProgress] = useRecoilState(spinnerAtom);
+    const [userState, setUserState] = useRecoilState(userAtom);
 
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
@@ -52,14 +55,13 @@ const Signin = ({ navigation }) => {
 
     const _handleSigninBtnPress = async () => {
         try {
-            spinner.start();
+            setInProgress(true);
             const user = await signin({ email, password });
-            setUser(user);
-            // navigation.navigate('Profile', { user });
+            setUserState({ uid: user.uid });
         } catch (e) {
             Alert.alert('Signin Error', e.message);
         } finally {
-            spinner.stop();
+            setInProgress(false);
         }
     };
 
